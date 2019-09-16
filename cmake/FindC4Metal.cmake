@@ -90,7 +90,7 @@ if(CM_FOUND)
     -Qxcm_jit_target=${GEN_ARCH}
     -mCM_emit_common_isa
     -isystem ${CM_C_INCLUDE_DIR}
-    CACHE STRING "cmc flags")
+    CACHE INTERNAL "cmc flags")
   if(CM_EMU OR CM_SIM)
     # TODO something..
   endif()
