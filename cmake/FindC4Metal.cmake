@@ -69,6 +69,12 @@ find_path(CM_RT_INCLUDE_DIR
     ${CM_ROOT}/runtime/include
   DOC "CM runtime include dir")
 
+if(EXISTS ${CM_ROOT})
+  set(CM_ROOT ${CM_ROOT})
+else()
+  set(CM_ROOT $ENV{CM_ROOT})
+endif()
+set(CM_ROOT ${CM_ROOT} CACHE PATH "Root diretory of C for Metal compiler and runtime")
 include(FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(CM DEFAULT_MSG CM_COMPILER CM_C_INCLUDE_DIR CM_RT_INCLUDE_DIR)
 
@@ -77,6 +83,7 @@ if(CM_FOUND)
   if(${CM_GEN} STREQUAL "")
     set(CM_GEN $ENV{CM_GEN})
   endif()
+  message(STATUS "CM compiling target: ${CM_GEN}")
   # set(CM_SKU GT2 CACHE STRING "GEN arch name (Default: GEN9)")
   # set(CM_DX_VERSION DX9 CACHE STRING "DX9 | DX11 (Default: DX9)")
   # set(CM_PRODUCT_BRANCH nf CACHE STRING "(Default: nf)")
