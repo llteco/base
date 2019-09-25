@@ -1,7 +1,10 @@
+# Copyright (c) 2019 Wenyi Tang
+# Author: Wenyi Tang
+# E-mail: wenyitang@outlook.com
 include(ExternalProject)
 
 set(spdlog_URL https://github.com/gabime/spdlog.git)
-set(spdlog_TAG v1.3.1)
+set(spdlog_TAG v1.4.1)
 set(spdlog_INCLUDE_DIRS ${CMAKE_CURRENT_BINARY_DIR}/spdlog/include)
 
 ExternalProject_Add(spdlog-src
