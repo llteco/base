@@ -1,7 +1,7 @@
 {
   "C_Cpp.configurationWarnings": "Disabled",
   "cmake.configureOnOpen": false,
-  "clang-format.executable": "${workspaceFolder}/scripts/tools/clang-format",
+  "clang-format.executable": "${workspaceRoot}/scripts/tools/clang-format",
   "clang-format.style": "Google",
   "editor.tabSize": 2,
 }
