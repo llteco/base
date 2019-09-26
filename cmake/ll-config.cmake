@@ -44,6 +44,15 @@ The following cache variables may also be set:
 ``LL_GFX_LIBS_DEBUG``
   The debug library target of LL's graphic
 #]=======================================================================]
+foreach(_DIR $ENV{LL_ROOT} $ENV{LL_DIR} ${LL_ROOT} ${LL_DIR})
+  if(EXISTS ${_DIR})
+    set(LL_DIR ${_DIR})
+    break()
+  endif()
+endforeach()
+if(EXISTS ${LL_DIR})
+  set(LL_DIR ${LL_DIR} CACHE PATH "Path to LL installed directory")
+endif()
 
 find_path(LL_CODEC_INCLUDE_DIR ll_codec/codec/ixr_codec.h
   HINTS $ENV{LL_ROOT}/include ${LL_ROOT}/include ${LL_DIR}/include
