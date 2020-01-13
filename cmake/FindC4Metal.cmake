@@ -61,6 +61,8 @@ find_path(CM_C_INCLUDE_DIR
   HINTS
     $ENV{CM_ROOT}/compiler/include_llvm
     ${CM_ROOT}/compiler/include_llvm
+    $ENV{CM_ROOT}/compiler/include
+    ${CM_ROOT}/compiler/include
   DOC "CM compiler include dir")
 find_path(CM_RT_INCLUDE_DIR
   cm_rt.h
@@ -90,7 +92,6 @@ if(CM_FOUND)
   # set(CM_RUN_MODE HW CACHE STRING "Execution run mode HW | EMU | SIM (Default: HW)")
   cm_populate_arch_name(${CM_GEN})
   # cm_populate_sku_name(${CM_SKU})
-  # cm_populate_dx(${CM_DX_VERSION})
   # cm_populate_mode(${CM_RUN_MODE})
   set(CMAKE_CMC_FLAGS
     -Qxcm
@@ -105,11 +106,15 @@ if(CM_FOUND)
     add_library(CM::RT INTERFACE IMPORTED)
     set_target_properties(CM::RT PROPERTIES
       INTERFACE_INCLUDE_DIRECTORIES "${CM_RT_INCLUDE_DIR}")
-    if(CM_LEGANCY)
-      cm_populate_dx(CM_DX9)
-    else()
-      cm_populate_dx(CM_DX11)
-    endif()
+    if(WIN32)
+      if(CM_LEGANCY)
+        cm_populate_dx(CM_DX9)
+      else()
+        cm_populate_dx(CM_DX11)
+      endif()
+    else(WIN32)
+      cm_populate_va(CM_VA)
+    endif(WIN32)
   endif()  
 endif()
 mark_as_advanced(CM_COMPILER CM_C_INCLUDE_DIR CM_RT_INCLUDE_DIR CMAKE_CMC_FLAGS)

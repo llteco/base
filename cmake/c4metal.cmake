@@ -122,9 +122,13 @@ endmacro(cm_populate_sku_name)
 
 macro(cm_populate_dx dx)
   string(TOUPPER ${dx} DX)
-  set(DX_PREFIX ${DX})
   add_definitions(-D${DX})
 endmacro(cm_populate_dx)
+
+macro(cm_populate_va va)
+  string(TOUPPER ${va} VA)
+  add_definitions(-D${VA})
+endmacro(cm_populate_va)
 
 macro(cm_populate_mode m)
   string(TOUPPER ${m} M)
