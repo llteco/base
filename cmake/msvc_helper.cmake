@@ -64,6 +64,11 @@ macro(require_cxx_standard std)
   endif()
 endmacro(require_cxx_standard)
 
+macro(link_onecore)
+  set(CMAKE_CXX_STANDARD_LIBRARIES "OneCore.lib")
+  set(CMAKE_C_STANDARD_LIBRARIES "OneCore.lib")
+endmacro(link_onecore)
+
 ## Auto update version string in .rc resource file of VS project
 function(gen_version_rc ...)
   # Func: gen_version_rc(ver resource output icon)
