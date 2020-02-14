@@ -42,7 +42,8 @@ if __name__ == '__main__':
         return True
 
     files = CollectFilesFromDir(param.dir, True)
+    formatter = Path(param.formatter).resolve().absolute()
     for f in filter(exclude_file, files):
-        cmd = f"{param.formatter} -style={param.style} -i {str(f)}"
+        cmd = f"{formatter} -style={param.style} -i {str(f)}"
         cmd += " --fallback-style=google"
         subprocess.call(cmd, stdout=None, shell=True)
