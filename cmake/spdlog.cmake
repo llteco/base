@@ -21,7 +21,16 @@ ExternalProject_Add(spdlog-src
     -DCMAKE_CXX_FLAGS_RELEASE:STRING=${CMAKE_CXX_FLAGS_RELEASE}
     -DCMAKE_INSTALL_PREFIX:STRING=<INSTALL_DIR>)
 
-include_directories(${spdlog_INCLUDE_DIRS})
 add_library(spdlog INTERFACE)
 add_dependencies(spdlog spdlog-src)
-add_definitions(-DSPDLOG)
+target_include_directories(spdlog INTERFACE 
+  $<INSTALL_INTERFACE:include>
+  $<BUILD_INTERFACE:${spdlog_INCLUDE_DIRS}>
+)
+target_compile_definitions(spdlog INTERFACE SPDLOG SPDLOG_WCHAR_FILENAMES)
+
+install(TARGETS spdlog
+  EXPORT spdlog-export
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+install(DIRECTORY ${spdlog_INCLUDE_DIRS} DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(EXPORT spdlog-export DESTINATION ${CMAKE_INSTALL_PREFIX})
